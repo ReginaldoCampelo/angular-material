@@ -10,6 +10,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { AngularMaterialDataGridModule } from 'angular-material-data-grid';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatListModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    AngularMaterialDataGridModule
   ],
   providers: [
     {
