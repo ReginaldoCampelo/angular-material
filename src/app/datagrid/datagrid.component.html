@@ -1,1 +1,6 @@
-<p>datagrid works!</p>
+<amdg-grid
+    [headings]="headings"
+    [url]="url"
+    [serverSidePagination]="true"
+    (responseEmit)="responseReceived($event)">
+</amdg-grid>
