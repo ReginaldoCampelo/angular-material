@@ -5,8 +5,7 @@ export class User {
   email: string;
   cpf: string;
   cnh: string;
-  birthDay: Date;
-  sex: string;
+  gender: string;
   phone: string;
   address: string;
   city: string;
