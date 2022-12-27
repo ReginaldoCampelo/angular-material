@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ProgressSpinnerComponentComponent } from './progress-spinner-component/progress-spinner-component.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { DataGridComponent } from './datagrid/datagrid.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DataGridComponent } from './datagrid/datagrid.component';
     FormFieldInputComponent,
     ProgressSpinnerComponentComponent,
     TabsComponent,
-    DataGridComponent
+    DataGridComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
