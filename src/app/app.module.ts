@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './material/material.module';
-import { ButtonsIconsComponent } from './buttons-icons/buttons-icons.component';
-import { FormFieldInputComponent } from './form-field-input/form-field-input.component';
-import { FormsModule } from '@angular/forms';
-import { ProgressSpinnerComponentComponent } from './progress-spinner-component/progress-spinner-component.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { DataGridComponent } from './datagrid/datagrid.component';
+import { MaterialModule } from './shared/material/material.module';
+import { ButtonsIconsComponent } from './pages/buttons-icons/buttons-icons.component';
+import { DataGridComponent } from './pages/datagrid/datagrid.component';
+import { FormFieldInputComponent } from './pages/form-field-input/form-field-input.component';
+import { ProgressSpinnerComponentComponent } from './pages/progress-spinner-component/progress-spinner-component.component';
+import { TabsComponent } from './pages/tabs/tabs.component';
+import { UserFormComponent } from './pages/user/user-form/user-form.component';
+import { UserListComponent } from './pages/user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { DataGridComponent } from './datagrid/datagrid.component';
     FormFieldInputComponent,
     ProgressSpinnerComponentComponent,
     TabsComponent,
-    DataGridComponent
+    DataGridComponent,
+    UserListComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,

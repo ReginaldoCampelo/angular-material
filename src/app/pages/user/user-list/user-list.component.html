@@ -1,0 +1,10 @@
+<mat-toolbar class="grid-toolbar">
+  <button mat-button routerLink="/user-form"><mat-icon class="mat-18">add_circle</mat-icon> Add User</button>
+</mat-toolbar>
+
+<amdg-grid
+    [headings]="headings"
+    [url]="url"
+    [serverSidePagination]="true"
+    (responseEmit)="responseReceived($event)">
+</amdg-grid>

@@ -25,6 +25,8 @@ Refer to the project's `package.json` file for its configured script commands.
  ## 👨‍💻 Local testing/development
 `npm run start:dev` should kickstart the project with the default environment (`\environments\environment.ts`). Or run `npm` with `start` to start the project.
 
+`npm run json-server`should start fake backend on port 3000 (`http://localhost:3000/`).
+
 ## 📝 Documentation
 Our projects implement [Comodoc](https://compodoc.app/) to standardize documentation and generate docs for the entire Angular project.
 

@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "start:dev": "ng serve angular-material --configuration development --port 5000",
+    "json-server": "json-server --watch db.json",
     "build:qa": "ng build --configuration qa",
     "build:prod": "ng build --configuration production",
     "compodoc:build": "compodoc -p tsconfig.doc.json",
@@ -28,6 +29,7 @@
     "@angular/router": "^14.0.0",
     "@compodoc/compodoc": "^1.1.19",
     "angular-material-data-grid": "^0.8.0",
+    "json-server": "^0.17.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
