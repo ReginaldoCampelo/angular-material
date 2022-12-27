@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'formFieldInput', component: FormFieldInputComponent },
   { path: 'progressSpinner', component: ProgressSpinnerComponentComponent},
   { path: 'tabs', component: TabsComponent },
-  { path: 'dataGrid', component: DataGridComponent }
+  { path: 'dataGrid', component: DataGridComponent },
+  { path: '', redirectTo: '/dataGrid', pathMatch: 'full' }
 ];
 
 @NgModule({
