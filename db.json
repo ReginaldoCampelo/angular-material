@@ -29,33 +29,6 @@
       "state": "Default State",
       "zipCode": "61.000-000",
       "country": "Brazil"
-    },
-    {
-      "entity": null,
-      "page": 1,
-      "perPage": 100,
-      "filters": [],
-      "sort": null,
-      "sortField": null,
-      "id": 3
-    },
-    {
-      "entity": null,
-      "page": 1,
-      "perPage": 100,
-      "filters": [],
-      "sort": null,
-      "sortField": null,
-      "id": 4
-    },
-    {
-      "entity": null,
-      "page": 1,
-      "perPage": 100,
-      "filters": [],
-      "sort": null,
-      "sortField": null,
-      "id": 5
     }
   ]
 }
