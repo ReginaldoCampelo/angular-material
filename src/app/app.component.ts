@@ -12,11 +12,12 @@ export const SHADOW_LIMIT = 100;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterContentInit {
-  public isSmallScreen = false;
-  public popText = false;
-  public applyShadow = false;
+  public isSmallScreen: boolean = false;
+  public popText: boolean = false;
+  public applyShadow: boolean = false;
 
-  title = 'angular-material';
+  title: string = 'angular-material';
+  logo: string = 'assets/images/logo.svg'
   constructor(private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
