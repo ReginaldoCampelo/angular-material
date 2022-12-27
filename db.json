@@ -1,19 +1,61 @@
 {
-  "posts": [
+  "user": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "first_name": "Steve",
+      "last_name": "Jobs",
+      "email": "steve.jobs@mail.com",
+      "cpf": "385.497.460-45",
+      "cnh": "09427690666",
+      "gender": "Male",
+      "phone": "(85) 9 9999-9999",
+      "address": "Default Address",
+      "city": "Default City",
+      "state": "Default State",
+      "zipCode": "61.000-000",
+      "country": "Brazil"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 2,
+      "first_name": "Bill",
+      "last_name": "Gates",
+      "email": "bill.gates@mail.com",
+      "cpf": "342.367.560-80",
+      "cnh": "00497615001",
+      "gender": "Male",
+      "phone": "(85) 9 8888-8888",
+      "address": "Default Address",
+      "city": "Default City",
+      "state": "Default State",
+      "zipCode": "61.000-000",
+      "country": "Brazil"
+    },
+    {
+      "entity": null,
+      "page": 1,
+      "perPage": 100,
+      "filters": [],
+      "sort": null,
+      "sortField": null,
+      "id": 3
+    },
+    {
+      "entity": null,
+      "page": 1,
+      "perPage": 100,
+      "filters": [],
+      "sort": null,
+      "sortField": null,
+      "id": 4
+    },
+    {
+      "entity": null,
+      "page": 1,
+      "perPage": 100,
+      "filters": [],
+      "sort": null,
+      "sortField": null,
+      "id": 5
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
