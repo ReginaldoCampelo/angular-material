@@ -1,13 +1,13 @@
-import { UserFormComponent } from './user/user-form/user-form.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { ProgressSpinnerComponentComponent } from './progress-spinner-component/progress-spinner-component.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ButtonsIconsComponent } from './buttons-icons/buttons-icons.component';
-import { FormFieldInputComponent } from './form-field-input/form-field-input.component';
-import { DataGridComponent } from './datagrid/datagrid.component';
-import { UserListComponent } from './user/user-list/user-list.component';
+import { UserFormComponent } from './pages//user/user-form/user-form.component';
+import { UserListComponent } from './pages//user/user-list/user-list.component';
+import { ButtonsIconsComponent } from './pages/buttons-icons/buttons-icons.component';
+import { DataGridComponent } from './pages/datagrid/datagrid.component';
+import { FormFieldInputComponent } from './pages/form-field-input/form-field-input.component';
+import { ProgressSpinnerComponentComponent } from './pages/progress-spinner-component/progress-spinner-component.component';
+import { TabsComponent } from './pages/tabs/tabs.component';
 
 const routes: Routes = [
   { path: 'buttonIcon', component: ButtonsIconsComponent },
