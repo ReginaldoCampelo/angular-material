@@ -1,0 +1,15 @@
+.custom-icon {
+  width: 25px; /* ajuste para o tamanho do seu ícone */
+  height: 41px; /* ajuste para o tamanho do seu ícone */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid red; /* borda do ícone */
+  background-color: white; /* cor de fundo */
+}
+
+.custom-icon i::before {
+  font-size: 24px;
+  color: green; /* cor do ícone */
+}
