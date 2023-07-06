@@ -9,7 +9,7 @@ import * as L from 'leaflet';
 export class MapComponent implements OnInit, AfterViewInit {
   private map;
 
-  noRiskColor: string = '#0691ce';
+  noRiskColor: string = '#6fb84c';
   lowRiskColor: string = '#51c7fa';
   mediumRiskColor: string = '#ffa500';
   highRiskColor: string = '#FF5B5B';
