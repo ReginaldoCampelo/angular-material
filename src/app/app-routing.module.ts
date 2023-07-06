@@ -6,6 +6,7 @@ import { UserListComponent } from './pages//user/user-list/user-list.component';
 import { ButtonsIconsComponent } from './pages/buttons-icons/buttons-icons.component';
 import { DataGridComponent } from './pages/datagrid/datagrid.component';
 import { FormFieldInputComponent } from './pages/form-field-input/form-field-input.component';
+import { MapComponent } from './pages/map/map.component';
 import { ProgressSpinnerComponentComponent } from './pages/progress-spinner-component/progress-spinner-component.component';
 import { TabsComponent } from './pages/tabs/tabs.component';
 
@@ -18,11 +19,12 @@ const routes: Routes = [
   { path: 'user-list', component: UserListComponent },
   { path: 'user-form', component: UserFormComponent },
   { path: 'user-form/:id', component: UserFormComponent },
-  { path: '', redirectTo: '/user-list', pathMatch: 'full' }
+  { path: 'map', component: MapComponent },
+  { path: '', redirectTo: '/map', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

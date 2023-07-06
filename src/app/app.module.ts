@@ -13,6 +13,7 @@ import { ProgressSpinnerComponentComponent } from './pages/progress-spinner-comp
 import { TabsComponent } from './pages/tabs/tabs.component';
 import { UserFormComponent } from './pages/user/user-form/user-form.component';
 import { UserListComponent } from './pages/user/user-list/user-list.component';
+import { MapComponent } from './pages/map/map.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserListComponent } from './pages/user/user-list/user-list.component';
     TabsComponent,
     DataGridComponent,
     UserListComponent,
-    UserFormComponent
+    UserFormComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
