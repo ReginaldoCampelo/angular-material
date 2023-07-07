@@ -20,6 +20,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   vehicleRunningColor: string = '#4caf50';
 
   isLegendShow: boolean = false;
+  isMobile: boolean = false;
 
   // lista de combinações de cores de risco e status
   riskStatusCombinations: Array<{ risk: string; status: string }> = [
@@ -35,7 +36,9 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.verifyIfIsMobile();
+  }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -75,7 +78,9 @@ export class MapComponent implements OnInit, AfterViewInit {
     ];
 
     for (const location of locations) {
-      const randomIndex = Math.floor(Math.random() * this.riskStatusCombinations.length);
+      const randomIndex = Math.floor(
+        Math.random() * this.riskStatusCombinations.length
+      );
       const randomCombination = this.riskStatusCombinations[randomIndex];
       const randomDirection = Math.floor(Math.random() * 360);
 
@@ -96,10 +101,16 @@ export class MapComponent implements OnInit, AfterViewInit {
 
       const marker = L.marker(location, { icon: customIcon }).addTo(this.map);
       marker.getElement()?.classList.add('marker-with-direction');
-      marker.bindPopup(`<b>Olá!</b><br>Eu sou um caminhão em ${this.getRiskStatusText(randomIndex)}.`);
+      marker.bindPopup(
+        `<b>Olá!</b><br>Eu sou um caminhão em ${this.getRiskStatusText(
+          randomIndex
+        )}.`
+      );
 
       // Atualizar a rotação da seta usando CSS
-      const arrowElement = marker.getElement()?.querySelector('.arrow.arrow-' + randomDirection);
+      const arrowElement = marker
+        .getElement()
+        ?.querySelector('.arrow.arrow-' + randomDirection);
       console.log(arrowElement);
       if (arrowElement instanceof HTMLElement) {
         arrowElement.style.transform = `rotate(${randomDirection}deg)`;
@@ -136,5 +147,13 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   randowMarks(): void {
     window.location.reload();
+  }
+
+  verifyIfIsMobile() {
+    if (window.innerWidth <= 768) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
   }
 }
