@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import 'leaflet-arrowheads';
 
 @Component({
   selector: 'app-map',
@@ -17,6 +18,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   vehicleOfflineColor: string = '#8c9197';
   vehicleStoppedWithMotorOnColor: string = '#e9c73a';
   vehicleRunningColor: string = '#4caf50';
+
+  isLegendShow: boolean = false;
 
   // lista de combinações de cores de risco e status
   riskStatusCombinations: Array<{ risk: string; status: string }> = [
@@ -47,7 +50,9 @@ export class MapComponent implements OnInit, AfterViewInit {
       border-radius: 50%;
       background-color: #fafafa;
       padding: 5px;
-      width: 100%;`;
+      width: 100%;
+      position: relative;
+    `;
   }
 
   private initMap(): void {
@@ -58,8 +63,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       attribution: 'Map data © OpenStreetMap contributors',
     }).addTo(this.map);
 
-    // criar um array de localizações
-    let locations: L.LatLngExpression[] = [
+    const locations: L.LatLngExpression[] = [
       [51.505, -0.09],
       [51.515, -0.1],
       [51.525, -0.08],
@@ -70,27 +74,38 @@ export class MapComponent implements OnInit, AfterViewInit {
       [51.575, -0.03],
     ];
 
-    // criar um ícone de marcador personalizado para cada combinação de risco e status
-    for (let j = 0; j < locations.length; j++) {
-      // selecionar aleatoriamente uma combinação de risco e status
+    for (const location of locations) {
       const randomIndex = Math.floor(Math.random() * this.riskStatusCombinations.length);
       const randomCombination = this.riskStatusCombinations[randomIndex];
+      const randomDirection = Math.floor(Math.random() * 360);
 
-      let customIcon = L.divIcon({
+      const customIcon = L.divIcon({
         className: 'custom-icon',
-        html: `<div style="${this.getTruckIconStyle(
-          randomCombination.risk,
-          randomCombination.status
-        )}"><i class="fa fa-truck"></i></div>`,
+        html: `
+          <div style="${this.getTruckIconStyle(
+            randomCombination.risk,
+            randomCombination.status
+          )}">
+            <i class="fa fa-truck"></i>
+            <div class="arrow arrow-${randomDirection}"></div>
+          </div>
+        `,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
       });
 
-      let marker = L.marker(locations[j], { icon: customIcon }).addTo(this.map);
+      const marker = L.marker(location, { icon: customIcon }).addTo(this.map);
+      marker.getElement()?.classList.add('marker-with-direction');
       marker.bindPopup(`<b>Olá!</b><br>Eu sou um caminhão em ${this.getRiskStatusText(randomIndex)}.`);
+
+      // Atualizar a rotação da seta usando CSS
+      const arrowElement = marker.getElement()?.querySelector('.arrow.arrow-' + randomDirection);
+      console.log(arrowElement);
+      if (arrowElement instanceof HTMLElement) {
+        arrowElement.style.transform = `rotate(${randomDirection}deg)`;
+      }
     }
   }
-
 
   private getRiskStatusText(index: number): string {
     switch (index) {
@@ -113,5 +128,13 @@ export class MapComponent implements OnInit, AfterViewInit {
       default:
         return '';
     }
+  }
+
+  showLegend(): void {
+    this.isLegendShow = !this.isLegendShow;
+  }
+
+  randowMarks(): void {
+    window.location.reload();
   }
 }

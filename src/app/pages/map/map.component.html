@@ -1,1 +1,45 @@
-<div id="map" style="height: 500px;"></div>
+<div id="map" style="height: 500px"></div>
+<div class="float-right-map">
+  <button mat-raised-button color="primary" (click)="showLegend()">
+    Show Information
+  </button>
+</div>
+
+<div class="float-left-map">
+  <button mat-raised-button color="warn" (click)="randowMarks()">
+    Update Data
+  </button>
+</div>
+
+<div id="legendPopup" *ngIf="isLegendShow">
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #6fb84c"></div>
+      <div class="legend-label">No Risk</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #51c7fa"></div>
+      <div class="legend-label">Low Risk</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #ffa500"></div>
+      <div class="legend-label">Medium Risk</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #ff5b5b"></div>
+      <div class="legend-label">High Risk</div>
+    </div>
+    <div class="legend-item">
+      <i class="fa fa-truck truck-icon" style="color: #8c9197"></i>
+      <div style="margin-left: 7px">Offline</div>
+    </div>
+    <div class="legend-item">
+      <i class="fa fa-truck truck-icon" style="color: #e9c73a"></i>
+      <div style="margin-left: 7px">Stopped with Motor On</div>
+    </div>
+    <div class="legend-item">
+      <i class="fa fa-truck truck-icon" style="color: #4caf50"></i>
+      <div style="margin-left: 7px">Running</div>
+    </div>
+  </div>
+</div>
