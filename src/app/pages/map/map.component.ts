@@ -113,17 +113,17 @@ export class MapComponent implements OnInit, AfterViewInit {
   private getRiskStatusText(index: number): string {
     switch (index) {
       case 0:
-        return 'no risk and running';
+        return 'no risk and moving';
       case 1:
         return 'low risk and stopped with motor on';
       case 2:
         return 'medium risk and offline';
       case 3:
-        return 'high risk and running';
+        return 'high risk and moving';
       case 4:
         return 'no risk and offline';
       case 5:
-        return 'low risk and running';
+        return 'low risk and moving';
       case 6:
         return 'medium risk and stopped with motor on';
       case 7:
