@@ -44,20 +44,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.initMap();
   }
 
-  private getTruckIconStyle(riskColor: string, statusColor: string): string {
-    return `
-      text-align: center;
-      font-size: 16px;
-      color: ${statusColor};
-      border: 6px solid ${riskColor};
-      border-radius: 50%;
-      background-color: #fafafa;
-      padding: 5px;
-      width: 100%;
-      position: relative;
-    `;
-  }
-
   private initMap(): void {
     this.map = L.map('map').setView([51.505, -0.09], 13);
 
@@ -87,12 +73,11 @@ export class MapComponent implements OnInit, AfterViewInit {
       const customIcon = L.divIcon({
         className: 'custom-icon',
         html: `
-          <div style="${this.getTruckIconStyle(
-            randomCombination.risk,
-            randomCombination.status
-          )}">
-            <i class="fa fa-truck"></i>
-            <div class="arrow arrow-${randomDirection}"></div>
+          <div class="truck-icon" style="transform: rotate(${randomDirection}deg);">
+            <div class="icon-container">
+              <img src="${this.getIconPath(randomCombination.status)}" style="width: 100%; height: 100%;" />
+            </div>
+            <i style="color: ${randomCombination.risk}; font-size: 30px; position: absolute; top: 50%; left: 100%; transform: translateY(-50%); margin-left: 3px;" class="fas fa-exclamation"></i>
           </div>
         `,
         iconSize: [25, 41],
@@ -102,20 +87,27 @@ export class MapComponent implements OnInit, AfterViewInit {
       const marker = L.marker(location, { icon: customIcon }).addTo(this.map);
       marker.getElement()?.classList.add('marker-with-direction');
       marker.bindPopup(
-        `<b>Olá!</b><br>Eu sou um caminhão em ${this.getRiskStatusText(
+        `<b>Olá!</b><br>Eu sou um carro em ${this.getRiskStatusText(
           randomIndex
         )}.`
       );
-
-      // Atualizar a rotação da seta usando CSS
-      const arrowElement = marker
-        .getElement()
-        ?.querySelector('.arrow.arrow-' + randomDirection);
-      console.log(arrowElement);
-      if (arrowElement instanceof HTMLElement) {
-        arrowElement.style.transform = `rotate(${randomDirection}deg)`;
-      }
     }
+  }
+
+  private getIconPath(statusColor: string): string {
+    let iconPath = '';
+    switch (statusColor) {
+      case this.vehicleRunningColor:
+        iconPath = 'assets/images/car-running-icon.svg';
+        break;
+      case this.vehicleOfflineColor:
+        iconPath = 'assets/images/car-offline-icon.svg';
+        break;
+      case this.vehicleStoppedWithMotorOnColor:
+        iconPath = 'assets/images/car-stopped-icon.svg';
+        break;
+    }
+    return iconPath;
   }
 
   private getRiskStatusText(index: number): string {

@@ -66,3 +66,13 @@
     z-index: 9999;
   }
 }
+
+.chevron-top,
+.chevron-bottom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
