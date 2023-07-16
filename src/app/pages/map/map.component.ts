@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import 'leaflet-arrowheads';
+import 'leaflet.markercluster';
 
 @Component({
   selector: 'app-map',
@@ -9,6 +9,11 @@ import 'leaflet-arrowheads';
 })
 export class MapComponent implements OnInit, AfterViewInit {
   private map;
+  private markerClusterGroup: L.MarkerClusterGroup;
+  private markerClusterOptions: L.MarkerClusterGroupOptions = {
+    disableClusteringAtZoom: 13,
+    spiderfyOnMaxZoom: false,
+  };
 
   noRiskColor: string = '#6fb84c';
   lowRiskColor: string = '#51c7fa';
@@ -22,7 +27,6 @@ export class MapComponent implements OnInit, AfterViewInit {
   isLegendShow: boolean = false;
   isMobile: boolean = false;
 
-  // lista de combinações de cores de risco e status
   riskStatusCombinations: Array<{ risk: string; status: string }> = [
     { risk: this.noRiskColor, status: this.vehicleRunningColor },
     { risk: this.lowRiskColor, status: this.vehicleStoppedWithMotorOnColor },
@@ -45,22 +49,36 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private initMap(): void {
-    this.map = L.map('map').setView([51.505, -0.09], 13);
+    this.map = L.map('map').setView([-28.2625, -52.4072], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: 'Map data © OpenStreetMap contributors',
     }).addTo(this.map);
 
+    this.markerClusterGroup = L.markerClusterGroup(this.markerClusterOptions);
+
     const locations: L.LatLngExpression[] = [
-      [51.505, -0.09],
-      [51.515, -0.1],
-      [51.525, -0.08],
-      [51.535, -0.07],
-      [51.545, -0.06],
-      [51.555, -0.05],
-      [51.565, -0.04],
-      [51.575, -0.03],
+      [-28.259, -52.431],
+      [-28.263, -52.444],
+      [-28.272, -52.416],
+      [-28.281, -52.408],
+      [-28.288, -52.424],
+      [-28.296, -52.437],
+      [-28.302, -52.419],
+      [-28.309, -52.411],
+      [-28.315, -52.427],
+      [-28.323, -52.440],
+      [-28.330, -52.422],
+      [-28.337, -52.414],
+      [-28.343, -52.430],
+      [-28.351, -52.443],
+      [-28.358, -52.425],
+      [-28.365, -52.417],
+      [-28.371, -52.433],
+      [-28.379, -52.446],
+      [-28.386, -52.428],
+      [-28.393, -52.420]
     ];
 
     for (const location of locations) {
@@ -77,14 +95,15 @@ export class MapComponent implements OnInit, AfterViewInit {
             <div class="icon-container">
               <img src="${this.getIconPath(randomCombination.status)}" style="width: 100%; height: 100%;" />
             </div>
-            <i style="color: ${randomCombination.risk}; font-size: 30px; position: absolute; top: 50%; left: 100%; transform: translateY(-50%); margin-left: 3px;" class="fas fa-exclamation"></i>
+            <i style="color: ${randomCombination.risk}; font-size: 15px; position: absolute; top: 72%; left: 100%; transform: translateY(-50%); margin-left: 2px;" class="fas fa-circle"></i>
           </div>
         `,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
       });
 
-      const marker = L.marker(location, { icon: customIcon }).addTo(this.map);
+      const marker = L.marker(location, { icon: customIcon });
+      this.markerClusterGroup.addLayer(marker);
       marker.getElement()?.classList.add('marker-with-direction');
       marker.bindPopup(
         `<b>Olá!</b><br>Eu sou um carro em ${this.getRiskStatusText(
@@ -92,19 +111,21 @@ export class MapComponent implements OnInit, AfterViewInit {
         )}.`
       );
     }
+
+    this.map.addLayer(this.markerClusterGroup);
   }
 
   private getIconPath(statusColor: string): string {
     let iconPath = '';
     switch (statusColor) {
       case this.vehicleRunningColor:
-        iconPath = 'assets/images/car-running-icon.svg';
+        iconPath = 'assets/images/car-moving-icon.svg';
         break;
       case this.vehicleOfflineColor:
         iconPath = 'assets/images/car-offline-icon.svg';
         break;
       case this.vehicleStoppedWithMotorOnColor:
-        iconPath = 'assets/images/car-stopped-icon.svg';
+        iconPath = 'assets/images/car-stopped-enginer-on-icon.svg';
         break;
     }
     return iconPath;
@@ -115,7 +136,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       case 0:
         return 'no risk and moving';
       case 1:
-        return 'low risk and stopped with motor on';
+        return 'low risk and stopped with engine on';
       case 2:
         return 'medium risk and offline';
       case 3:
