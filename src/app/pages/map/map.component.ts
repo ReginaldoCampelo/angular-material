@@ -68,17 +68,17 @@ export class MapComponent implements OnInit, AfterViewInit {
       [-28.302, -52.419],
       [-28.309, -52.411],
       [-28.315, -52.427],
-      [-28.323, -52.440],
-      [-28.330, -52.422],
+      [-28.323, -52.44],
+      [-28.33, -52.422],
       [-28.337, -52.414],
-      [-28.343, -52.430],
+      [-28.343, -52.43],
       [-28.351, -52.443],
       [-28.358, -52.425],
       [-28.365, -52.417],
       [-28.371, -52.433],
       [-28.379, -52.446],
       [-28.386, -52.428],
-      [-28.393, -52.420]
+      [-28.393, -52.42],
     ];
 
     for (const location of locations) {
@@ -88,19 +88,40 @@ export class MapComponent implements OnInit, AfterViewInit {
       const randomCombination = this.riskStatusCombinations[randomIndex];
       const randomDirection = Math.floor(Math.random() * 360);
 
-      const customIcon = L.divIcon({
+      // const customIcon = L.divIcon({
+      //   className: 'custom-icon',
+      //   html: `
+      //     <div class="truck-icon" style="transform: rotate(${randomDirection}deg);">
+      //       <div class="icon-container">
+      //         <img src="${this.getIconPath(randomCombination.status)}" style="width: 50px; height: 100%;" />
+      //         <div class="circle"></div> <!-- Adiciona o elemento do círculo -->
+      //       </div>
+      //       </div>
+      //       `,
+      //       iconSize: [25, 41],
+      //       iconAnchor: [12, 41],
+      // });
+
+      let customIcon = L.divIcon({
         className: 'custom-icon',
         html: `
-          <div class="truck-icon" style="transform: rotate(${randomDirection}deg);">
-            <div class="icon-container">
-              <img src="${this.getIconPath(randomCombination.status)}" style="width: 100%; height: 100%;" />
+          <div style="text-align: center; background-color: #fafafa; padding: 1px; width: 44px; height: 44px; border-radius: 50%; border: 6px solid ${randomCombination.risk}; position: relative; transform: rotate(${randomDirection}deg);">
+            <div class="circle" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: none; width: 40px; height: 40px;">
+              <div class="icon-container" style="width: 100%; height: 100%;">
+                <img src="${this.getIconPath(randomCombination.status)}" style="width: 100%; height: 100%;" />
+              </div>
             </div>
-            <i style="color: ${randomCombination.risk}; font-size: 15px; position: absolute; top: 72%; left: 100%; transform: translateY(-50%); margin-left: 2px;" class="fas fa-circle"></i>
           </div>
         `,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
       });
+
+
+
+
+
+
 
       const marker = L.marker(location, { icon: customIcon });
       this.markerClusterGroup.addLayer(marker);
@@ -168,5 +189,17 @@ export class MapComponent implements OnInit, AfterViewInit {
     } else {
       this.isMobile = false;
     }
+  }
+
+  private getTruckIconStyle(riskColor: string): string {
+    return `
+      text-align: center;
+      background-color: #fafafa;
+      padding: 1px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 6px solid ${riskColor};
+    `;
   }
 }
