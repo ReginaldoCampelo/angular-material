@@ -26,6 +26,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   isLegendShow: boolean = false;
   isMobile: boolean = false;
+  showBorder: boolean = true;
 
   riskStatusCombinations: Array<{ risk: string; status: string }> = [
     { risk: this.noRiskColor, status: this.vehicleRunningColor },
@@ -49,6 +50,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private initMap(): void {
+    if (this.map) {
+      this.map.remove();
+    }
+
     this.map = L.map('map').setView([-28.2625, -52.4072], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -87,41 +92,26 @@ export class MapComponent implements OnInit, AfterViewInit {
       );
       const randomCombination = this.riskStatusCombinations[randomIndex];
       const randomDirection = Math.floor(Math.random() * 360);
-
-      // const customIcon = L.divIcon({
-      //   className: 'custom-icon',
-      //   html: `
-      //     <div class="truck-icon" style="transform: rotate(${randomDirection}deg);">
-      //       <div class="icon-container">
-      //         <img src="${this.getIconPath(randomCombination.status)}" style="width: 50px; height: 100%;" />
-      //         <div class="circle"></div> <!-- Adiciona o elemento do círculo -->
-      //       </div>
-      //       </div>
-      //       `,
-      //       iconSize: [25, 41],
-      //       iconAnchor: [12, 41],
-      // });
-
-      let customIcon = L.divIcon({
+      const customIcon = L.divIcon({
         className: 'custom-icon',
         html: `
-          <div style="text-align: center; background-color: #fafafa; padding: 1px; width: 44px; height: 44px; border-radius: 50%; border: 6px solid ${randomCombination.risk}; position: relative; transform: rotate(${randomDirection}deg);">
-            <div class="circle" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: none; width: 40px; height: 40px;">
-              <div class="icon-container" style="width: 100%; height: 100%;">
-                <img src="${this.getIconPath(randomCombination.status)}" style="width: 100%; height: 100%;" />
-              </div>
+        <div style="text-align: center; background-color: ${
+          this.showBorder ? '#fafafa' : 'transparent'
+        }; padding: 1px; width: 44px; height: 44px; border-radius: 50%; border: 6px solid ${
+          this.showBorder ? randomCombination.risk : 'transparent'
+        }; position: relative; transform: rotate(${randomDirection}deg);">
+          <div class="circle" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: none; width: 40px; height: 40px;">
+            <div class="icon-container" style="width: 100%; height: 100%;">
+              <img src="${this.getIconPath(
+                randomCombination.status
+              )}" style="width: 100%; height: 100%;" />
             </div>
           </div>
+        </div>
         `,
         iconSize: [25, 41],
         iconAnchor: [12, 41],
       });
-
-
-
-
-
-
 
       const marker = L.marker(location, { icon: customIcon });
       this.markerClusterGroup.addLayer(marker);
@@ -179,7 +169,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.isLegendShow = !this.isLegendShow;
   }
 
-  randowMarks(): void {
+  randomMarks(): void {
     window.location.reload();
   }
 
@@ -191,15 +181,8 @@ export class MapComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private getTruckIconStyle(riskColor: string): string {
-    return `
-      text-align: center;
-      background-color: #fafafa;
-      padding: 1px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 6px solid ${riskColor};
-    `;
+  toggleBorder(): void {
+    this.showBorder = !this.showBorder;
+    this.initMap();
   }
 }
